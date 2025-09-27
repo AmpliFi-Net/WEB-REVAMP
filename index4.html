@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AmpliFi Networks — Fast. Reliable. Secure.</title>
+  <meta name="description" content="AmpliFi Networks — Fast, reliable and affordable internet packages across Kenya. Fiber, business links, hotspots & managed connectivity.">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind Utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- Bootstrap JS (needed for toggler) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    :root { --brand-teal: #0d9488; --bg: #f8fafc; }
+    body { background: var(--bg); color: #0f172a; }
+    /* Navbar */
+    .navbar .nav-link { font-weight: 500; color: #0f172a !important; padding: 0.5rem 1rem; transition: 0.3s; border-bottom: 2px solid transparent; }
+    .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--brand-teal) !important; border-bottom: 2px solid var(--brand-teal); }
+    .navbar-toggler { border: none; font-size: 1.6rem; color: var(--brand-teal); }
+    .nav-scrolled { background: rgba(255,255,255,0.98) !important; backdrop-filter: blur(6px); box-shadow: 0 6px 20px rgba(2,6,23,0.06); }
+    /* Hero */
+    .hero-gradient { background: linear-gradient(140deg, rgba(13,148,136,0.95), rgba(14,165,233,0.9)); color: #fff; position: relative; }
+    .hero-gradient::after { content: ''; position: absolute; inset: 0; background: url('https://www.transparenttextures.com/patterns/cubes.png'); opacity: 0.08; z-index: 0; }
+    .typed-cursor { opacity: 1; animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    /* Cards */
+    .card-hover { transition: transform .25s ease, box-shadow .25s ease; border-radius: 1rem; }
+    .card-hover:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(2,6,23,0.12); }
+    /* Packages */
+    .package-card { border: none; border-radius: 1rem; background: #fff; position: relative; overflow: hidden; }
+    .package-card .ribbon { position: absolute; top: 0; right: -40px; background: var(--brand-teal); color: #fff; padding: 6px 50px; transform: rotate(45deg); font-size: 0.8rem; font-weight: bold; }
+    /* Buttons */
+    .btn-cta { background: linear-gradient(90deg,#06b6d4,#06b6a4); color: #fff; border: none; }
+    .btn-cta:hover { opacity: 0.9; }
+    /* Floating Buttons */
+    .whatsapp-fab, .call-fab { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .whatsapp-fab { background:#25d366; color:#fff; box-shadow:0 8px 20px rgba(16,185,129,0.25); }
+    .call-fab { background:#0369a1; color:#fff; box-shadow:0 10px 20px rgba(2,6,23,0.12); }
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.45); } 70% { box-shadow: 0 0 0 18px rgba(16,185,129,0); } 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); } }
+    /* Glassmorphism */
+    .glass-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); }
+
+    #mainNavbar .nav-link {
+  color: #0f1724 !important; /* forces dark color even with Tailwind resets */
+  transition: color 0.3s ease;
+}
+#mainNavbar .nav-link:hover {
+  color: var(--brand-teal) !important;
+}
+
+  </style>
+</head>
+<body>
+    <!-- Modern Visible Navbar -->
+<header class="fixed-top">
+  <!-- NAVBAR -->
+<nav class="navbar navbar-light bg-white shadow-sm py-3">
+  <div class="container d-flex justify-content-between align-items-center flex-wrap">
+    
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+      <img src="assets/img/favicon-32x32.png" alt="AmpliFi" width="48" height="48" class="rounded-sm">
+      <span class="fw-bold" style="color:var(--brand-teal); font-size: 1.8rem;">AmpliFi Networks</span>
+    </a>
+    
+    <!-- Menu -->
+    <ul class="navbar-nav d-flex flex-row gap-3 ms-auto">
+      <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+      <li class="nav-item"><a class="nav-link" href="packages.html">Packages</a></li>
+      <li class="nav-item"><a class="nav-link" href="careers.html">Clients</a></li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      <li class="nav-item"><a class="nav-link" href="payment.html">Payments</a></li>
+      <li class="nav-item"><a class="btn btn-sm btn-outline-primary" href="packages.html">View Packages</a></li>
+    </ul>
+    
+  </div>
+</nav>
+
+</header>
+
+
+
+
+
+
+  <!-- HERO -->
+  <section id="hero" class="hero-gradient min-vh-100 d-flex align-items-center">
+    <div class="container text-center z-10">
+      <h1 class="display-4 fw-bold mb-3" data-aos="fade-up">Connecting Kenya with <span id="typed-target"></span></h1>
+      <p class="lead mb-4" data-aos="fade-up" data-aos-delay="200">Affordable internet packages for homes, businesses, and hotspots — powered by AmpliFi Networks.</p>
+      <a href="packages.html" class="btn btn-cta px-4 py-2 rounded-pill shadow" data-aos="zoom-in" data-aos-delay="400">View Packages</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-5">
+    <div class="container text-center" data-aos="fade-up">
+      <h2 class="fw-bold mb-4">About Us</h2>
+      <p class="mb-0">AmpliFi Networks provides fast, reliable, and secure internet solutions across Kenya. Whether for your home, business, or public hotspots, we ensure seamless connectivity with 24/7 support.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-5 bg-gray-50">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5" data-aos="fade-up">Our Services</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card card-hover text-center p-4 glass-card">
+            <i class="bi bi-house fs-1 mb-3 text-teal-600"></i>
+            <h5>Home Internet</h5>
+            <p>Unlimited high-speed fiber and wireless packages for seamless home browsing, streaming, and gaming.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-hover text-center p-4 glass-card">
+            <i class="bi bi-building fs-1 mb-3 text-teal-600"></i>
+            <h5>Business Internet</h5>
+            <p>Dedicated and reliable connections to keep your business online with 99.9% uptime and priority support.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card card-hover text-center p-4 glass-card">
+            <i class="bi bi-wifi fs-1 mb-3 text-teal-600"></i>
+            <h5>Public Hotspots</h5>
+            <p>Affordable internet access for communities, schools, and public spaces with secure hotspot solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section id="packages" class="py-5">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5" data-aos="fade-up">Featured Packages</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card package-card card-hover text-center p-4">
+            <div class="ribbon">Popular</div>
+            <h5>Starter Plan</h5>
+            <p class="fs-3 fw-bold text-teal-600">KES 2,500 /mo</p>
+            <ul class="list-unstyled">
+              <li>10 Mbps Unlimited</li>
+              <li>Free Installation</li>
+              <li>24/7 Support</li>
+            </ul>
+            <a href="contact.html" class="btn btn-cta w-100 mt-3">Get Started</a>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card package-card card-hover text-center p-4">
+            <h5>Business Plan</h5>
+            <p class="fs-3 fw-bold text-teal-600">KES 5,000 /mo</p>
+            <ul class="list-unstyled">
+              <li>30 Mbps Unlimited</li>
+              <li>Priority Support</li>
+              <li>Free Router</li>
+            </ul>
+            <a href="contact.html" class="btn btn-cta w-100 mt-3">Get Started</a>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card package-card card-hover text-center p-4">
+            <h5>Enterprise Plan</h5>
+            <p class="fs-3 fw-bold text-teal-600">KES 12,000 /mo</p>
+            <ul class="list-unstyled">
+              <li>100 Mbps Dedicated</li>
+              <li>Static IP</li>
+              <li>99.9% SLA</li>
+            </ul>
+            <a href="contact.html" class="btn btn-cta w-100 mt-3">Get Started</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="packages.html" class="btn btn-outline-dark rounded-pill px-4">View More Packages</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="py-5 bg-gray-50">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5" data-aos="fade-up">What Our Clients Say</h2>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-right">
+          <div class="card card-hover p-4 glass-card">
+            <p>"AmpliFi has transformed our business operations with reliable internet and 24/7 support!"</p>
+            <h6 class="mb-0">— Sarah, Nairobi</h6>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card card-hover p-4 glass-card">
+            <p>"Super-fast home internet, and installation was free. Highly recommend their services."</p>
+            <h6 class="mb-0">— James, Kisumu</h6>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-left">
+          <div class="card card-hover p-4 glass-card">
+            <p>"Our hotspot project has been a success thanks to AmpliFi’s affordable packages."</p>
+            <h6 class="mb-0">— Mercy, Eldoret</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section id="contact" class="py-5 text-center">
+    <div class="container" data-aos="fade-up">
+      <h2 class="fw-bold mb-4">Get Connected Today</h2>
+      <p class="mb-4">Choose your package and let us bring reliable internet to your doorstep.</p>
+      <a href="contact.html" class="btn btn-cta px-5 py-2 rounded-pill">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-4 bg-dark text-white text-center">
+    <p class="mb-0">&copy; 2025 AmpliFi Networks. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <a href="https://wa.me/254700000000" target="_blank" class="position-fixed bottom-20 end-5 whatsapp-fab pulse"><i class="bi bi-whatsapp fs-3"></i></a>
+  <a href="tel:+254700000000" class="position-fixed bottom-40 end-5 call-fab"><i class="bi bi-telephone fs-4"></i></a>
+
+  <!-- Scroll Top -->
+  <button id="scrollTop" class="btn btn-cta rounded-circle"><i class="bi bi-arrow-up"></i></button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Navbar scroll
+      const navbar = document.getElementById('mainNavbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) navbar.classList.add('nav-scrolled');
+        else navbar.classList.remove('nav-scrolled');
+      });
+      // AOS init
+      AOS.init({ duration: 900, once: true });
+      // Typed.js
+      new Typed('#typed-target', { strings: ['Fast. Reliable. Secure.', 'Fiber & Wireless Solutions', '24/7 Local Support'], typeSpeed: 60, backSpeed: 40, backDelay: 1600, loop: true });
+      // Scroll top
+      const scrollBtn = document.getElementById('scrollTop');
+      window.addEventListener('scroll', () => { scrollBtn.style.display = window.scrollY > 200 ? 'block' : 'none'; });
+      scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    });
+  </script>
+</body>
+</html>

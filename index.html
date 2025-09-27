@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AmpliFi Networks — Fast. Reliable. Secure.</title>
+  <meta name="description" content="AmpliFi Networks — Fast, reliable and affordable internet packages across Kenya. Fiber, business links, hotspots & managed connectivity.">
+  <meta name="author" content="AmpliFi Networks">
+  <meta property="og:title" content="AmpliFi Networks — Fast. Reliable. Secure." />
+  <meta property="og:description" content="High-performance internet packages and managed connectivity across Kenya." />
+  <meta property="og:image" content="assets/img/og-image.png" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Tailwind utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    :root { --brand-teal: #0d9488; --bg: #f8fafc; }
+    body { background: var(--bg); color: #0f1724; }
+    .hero-gradient { background: linear-gradient(140deg, rgba(13,148,136,0.95), rgba(14,165,233,0.9)); color: #fff; }
+    .card-hover { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(2,6,23,0.08); }
+    .btn-cta { background: linear-gradient(90deg,#06b6d4,#06b6a4); color: #fff; border: none; }
+    .whatsapp-fab { width:56px; height:56px; border-radius:9999px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(16,185,129,0.12); }
+    .call-fab { width:56px; height:56px; border-radius:9999px; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 20px rgba(2,6,23,0.06); background:#0369a1; color:#fff; }
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.35); }
+      70% { box-shadow: 0 0 0 14px rgba(16,185,129,0); }
+      100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+    }
+    #scrollTop { right: 18px; bottom: 18px; position: fixed; display: none; z-index: 9999; }
+    .nav-scrolled { background: rgba(255,255,255,0.98); backdrop-filter: blur(6px); box-shadow: 0 6px 20px rgba(2,6,23,0.06); }
+    .typed-cursor { opacity: 1; animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    /* small responsive tweaks for hero image */
+    .hero-img { max-height: 420px; object-fit: cover; }
+
+
+
+    #mainNavbar {
+  z-index: 1000; /* higher than most elements */
+
+}
+
+body {
+  padding-top: 10px; /* adjust to match navbar height */
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+  
+  <!-- NAVBAR -->
+<!-- NAVBAR -->
+<header class="fixed-top">
+  <nav id="mainNavbar" class="navbar bg-transparent shadow-sm py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+        <img src="assets/img/favicon-32x32.png" alt="AmpliFi" width="48" height="48" class="rounded-sm">
+        <span class="fw-bold" style="color:var(--brand-teal); font-size: 1.6rem;">AmpliFi Networks</span>
+      </a>
+
+      <!-- Hamburger Button -->
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Menu -->
+      <ul class="navbar-menu">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="packages.html" class="nav-link">Packages</a></li>
+        <li><a href="careers.html" class="nav-link">Careers</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="payment.html" class="nav-link">Payments</a></li>
+        <li><a href="packages.html" class="btn btn-sm btn-outline-primary">View Packages</a></li>
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+<!-- CSS -->
+<style>
+/* Base styles */
+.navbar {
+  position: relative;
+  z-index: 1000;
+}
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar-menu li {
+  list-style: none;
+}
+.navbar-menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Hamburger button */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100;
+}
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    gap: 1rem;
+  }
+  .navbar-menu.active {
+    display: flex;
+  }
+  /* Hamburger animation */
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+  }
+}
+</style>
+
+<!-- JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.navbar-menu');
+
+  // Toggle open/close
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    menu.classList.toggle('active');
+  });
+
+  // Close after clicking a link
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.classList.remove('active');
+      menu.classList.remove('active');
+    });
+  });
+});
+</script>
+
+
+
+  <main class="pt-20">
+
+    
+
+    <!-- HERO -->
+<section class="hero-gradient d-flex align-items-center min-vh-100 text-center text-lg-start">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h1 class="display-4 fw-bold">Stay Connected with <br><span class="text-yellow-300">AmpliFi Networks</span></h1>
+        <p class="lead text-white/90 mb-4">Reliable internet solutions for homes, businesses & communities across Kenya.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="packages.html" class="btn btn-lg btn-cta">Explore Packages</a>
+          <a href="contact.html" class="btn btn-lg btn-outline-light">Get Connected</a>
+        </div>
+        <div class="mt-4 small text-white/80">
+          <span id="typed-target"></span>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-8 mt-lg-0" data-aos="fade-left">
+            <div class="relative rounded-lg overflow-hidden shadow-2xl card-hover">
+              <!-- hero image (swap with high-res) -->
+              <img src="assets/img/12481716.jpg" alt="AmpliFi connectivity" class="w-100 object-cover">
+              <div class="absolute bottom-4 left-4 bg-white/40 rounded-md p-3 d-inline-block">
+                <small class="text-uppercase text-muted">Featured</small>
+                <h6 class="mb-0">Business Fiber - Nairobi</h6>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ABOUT -->
+<section class="py-12 bg-white">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-md-6" data-aos="fade-right">
+        <img src="assets/img/about.jpg" class="rounded-xl shadow w-100" alt="About AmpliFi">
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <h2 class="fw-bold mb-3">Who We Are</h2>
+        <p class="text-muted">AmpliFi Networks is committed to providing high-quality internet with unmatched support. From <strong>fiber broadband</strong> for homes to <strong>dedicated enterprise links</strong>, we ensure seamless connectivity wherever you are.</p>
+        <a href="about.html" class="btn btn-outline-primary mt-3">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <!-- SERVICES -->
+<section class="py-12 bg-slate-50">
+  <div class="container" data-aos="fade-up">
+    <div class="text-center mb-6">
+      <h2 class="fw-bold">Our Services</h2>
+      <p class="text-muted">Flexible solutions for every type of customer.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-4 card-hover bg-white text-center rounded-xl shadow-sm">
+          <i class="bi bi-house-door fs-2 text-teal-600 mb-3"></i>
+          <h5>Home Broadband</h5>
+          <p class="text-muted">Affordable unlimited internet for households.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 card-hover bg-white text-center rounded-xl shadow-sm">
+          <i class="bi bi-building fs-2 text-teal-600 mb-3"></i>
+          <h5>Business Internet</h5>
+          <p class="text-muted">Reliable connectivity with SLAs & static IPs.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 card-hover bg-white text-center rounded-xl shadow-sm">
+          <i class="bi bi-wifi fs-2 text-teal-600 mb-3"></i>
+          <h5>Hotspot Solutions</h5>
+          <p class="text-muted">Public WiFi for cafes, schools, and events.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="services.html" class="btn btn-outline-primary">See All Services</a>
+    </div>
+  </div>
+</section>
+
+    <!-- PACKAGES (featured) -->
+    <section id="packages" class="py-14 container" data-aos="fade-up">
+      <div class="text-center mb-8">
+        <h3 class="fw-bold">Featured Internet Packages</h3>
+        <p class="text-muted">Highlighted plans — click "More Packages" for the full list.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Starter -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card rounded-xl p-4 text-center card-hover shadow-sm">
+            
+            <div class="mb-3"><span class="badge bg-teal-600">Starter</span></div>
+            <h4 class="fw-bold">15 Mbps</h4>
+            <div class="fs-3 fw-bold my-2">KES 2,500 <small class="text-muted fs-6">/ month</small></div>
+            <ul class="list-unstyled text-muted mb-4">
+              <li>Suitable for homes</li>
+              <li>Unlimited data</li>
+              <li>Standard support</li>
+            </ul>
+            <a href="#contact" class="btn btn-cta w-100">Order Starter</a>
+          </div>
+        </div>
+
+        <!-- Business -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card rounded-xl p-4 text-center shadow-lg" style="border:1px solid rgba(13,148,136,0.12);">
+            <div class="mb-3"><span class="badge" style="background:var(--brand-teal);color:#fff">Business</span></div>
+            <h4 class="fw-bold">40 Mbps</h4>
+            <div class="fs-3 fw-bold my-2">KES 5,000 <small class="text-muted fs-6">/ month</small></div>
+            <ul class="list-unstyled text-muted mb-4">
+              <li>Priority support & SLA</li>
+              <li>Static IP (optional)</li>
+              <li>Ideal for SMEs</li>
+            </ul>
+            <a href="#contact" class="btn btn-cta w-100">Order Business</a>
+          </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card rounded-xl p-4 text-center card-hover shadow-sm">
+            <div class="mb-3"><span class="badge bg-dark text-white">Enterprise</span></div>
+            <h4 class="fw-bold">100+ Mbps</h4>
+            <div class="fs-3 fw-bold my-2">Custom Pricing</div>
+            <ul class="list-unstyled text-muted mb-4">
+              <li>Dedicated links & SLAs</li>
+              <li>24/7 managed support</li>
+              <li>Premium security options</li>
+            </ul>
+            <a href="contact.html" class="btn btn-outline-primary w-100">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="packages.html" class="btn btn-outline-dark rounded-pill px-4">View More Packages</a>
+      </div>
+    </section>
+
+
+    <!-- WHY CHOOSE US -->
+<section class="py-12 bg-slate-100">
+  <div class="container text-center" data-aos="fade-up">
+    <h2 class="fw-bold mb-6">Why Choose AmpliFi?</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <i class="bi bi-shield-check fs-2 text-teal-600 mb-3"></i>
+        <h6 class="fw-bold">Secure Network</h6>
+        <p class="text-muted">Protected infrastructure with modern firewalls.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-headset fs-2 text-teal-600 mb-3"></i>
+        <h6 class="fw-bold">24/7 Support</h6>
+        <p class="text-muted">Local team available whenever you need help.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-speedometer2 fs-2 text-teal-600 mb-3"></i>
+        <h6 class="fw-bold">High Performance</h6>
+        <p class="text-muted">Low-latency connections optimized for work & play.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- CLIENTS (slider) -->
+    <section id="clients" class="py-10 container" data-aos="fade-up">
+      <div class="text-center mb-4">
+        <h5 class="fw-semibold">Trusted by</h5>
+      </div>
+      <div class="swiper clientSwiper">
+        <div class="swiper-wrapper align-items-center">
+          <div class="swiper-slide d-flex justify-content-center"><img loading="lazy" src="https://via.placeholder.com/150x60?text=Client+1" alt="Client 1" class="h-12 object-contain"></div>
+          <div class="swiper-slide d-flex justify-content-center"><img loading="lazy" src="https://via.placeholder.com/150x60?text=Client+2" alt="Client 2" class="h-12 object-contain"></div>
+          <div class="swiper-slide d-flex justify-content-center"><img loading="lazy" src="https://via.placeholder.com/150x60?text=Client+3" alt="Client 3" class="h-12 object-contain"></div>
+          <div class="swiper-slide d-flex justify-content-center"><img loading="lazy" src="https://via.placeholder.com/150x60?text=Client+4" alt="Client 4" class="h-12 object-contain"></div>
+          <div class="swiper-slide d-flex justify-content-center"><img loading="lazy" src="https://via.placeholder.com/150x60?text=Client+5" alt="Client 5" class="h-12 object-contain"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="py-12 bg-white/80">
+      <div class="container" data-aos="fade-up">
+        <div class="text-center mb-6">
+          <h4 class="fw-bold">Client feedback</h4>
+        </div>
+
+        <div class="swiper testimonialSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide p-3">
+              <div class="card rounded-xl p-4 shadow-sm">
+                <div class="d-flex gap-3">
+                  <div class="rounded-circle bg-teal-50 text-teal-600 p-3"><i class="bi bi-person-fill fs-4"></i></div>
+                  <div>
+                    <strong>John Mwangi</strong>
+                    <p class="mb-0 text-muted">"AmpliFi gave our office a reliable connection and proactive support."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide p-3">
+              <div class="card rounded-xl p-4 shadow-sm">
+                <div class="d-flex gap-3">
+                  <div class="rounded-circle bg-teal-50 text-teal-600 p-3"><i class="bi bi-person-fill fs-4"></i></div>
+                  <div>
+                    <strong>Sarah Atieno</strong>
+                    <p class="mb-0 text-muted">"Great local support and consistent speeds — recommended."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-pagination mt-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS / COUNTERS -->
+    <section id="stats" class="py-8 container" data-aos="fade-up">
+      <div class="row text-center g-4">
+        <div class="col-6 col-md-3">
+          <div class="p-4 bg-white rounded-xl shadow-sm">
+            <h3 class="text-teal-600 counter" data-target="500">0</h3>
+            <p class="mb-0 text-muted">Happy Clients</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="p-4 bg-white rounded-xl shadow-sm">
+            <h3 class="text-teal-600 counter" data-target="1200">0</h3>
+            <p class="mb-0 text-muted">Installations</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="p-4 bg-white rounded-xl shadow-sm">
+            <h3 class="text-teal-600 counter" data-target="99">0</h3>
+            <p class="mb-0 text-muted">Uptime (%)</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="p-4 bg-white rounded-xl shadow-sm">
+            <h3 class="text-teal-600 counter" data-target="24">0</h3>
+            <p class="mb-0 text-muted">Support / 7 Days</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+<section class="hero-gradient py-12 text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Ready to Connect?</h2>
+    <p class="text-white/90 mb-4">Join thousands of Kenyans already enjoying fast, reliable internet.</p>
+    <a href="contact.html" class="btn btn-lg btn-light">Contact Us</a>
+  </div>
+</section>
+
+    <!-- MAP -->
+    <section id="map" class="py-8 container" data-aos="fade-up">
+      <div class="card rounded-xl overflow-hidden shadow-sm">
+        <iframe loading="lazy" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15929.50135520168!2d36.810891!3d-1.275034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ske!4v1610000000000" style="border:0;" width="100%" height="360" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-6 bg-slate-900 text-white">
+    <div class="container d-flex flex-column align-items-center gap-3">
+      <div class="d-flex gap-3 align-items-center">
+        <img src="assets/img/favicon-32x32.png" alt="AmpliFi" width="36" height="36">
+        <div>
+          <strong>AmpliFi Networks</strong>
+          <div class="small text-muted">Reliable connectivity across Kenya</div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-3">
+        <a class="text-white/80 hover:text-white" href="#"><i class="bi bi-twitter"></i></a>
+        <a class="text-white/80 hover:text-white" href="#"><i class="bi bi-facebook"></i></a>
+        <a class="text-white/80 hover:text-white" href="#"><i class="bi bi-instagram"></i></a>
+        <a class="text-white/80 hover:text-white" href="#"><i class="bi bi-linkedin"></i></a>
+      </div>
+
+      <small class="text-white/60">
+  © 2025 AmpliFi Networks. All rights reserved. | 
+  <a href="payment.html" class="text-white/90 hover:text-white">Payments</a>
+</small>
+
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button id="scrollTop" class="btn btn-light rounded-circle shadow" aria-label="Scroll to top"><i class="bi bi-arrow-up-short fs-4"></i></button>
+
+  <!-- Floating WhatsApp quick link (redundant but useful) -->
+  <a href="https://wa.me/254742908950" target="_blank" class="position-fixed" style="right:18px;bottom:90px;z-index:9999;">
+    <div class="whatsapp-fab bg-green-500 text-white d-flex align-items-center justify-content-center pulse" aria-hidden="true">
+      <i class="bi bi-whatsapp fs-4"></i>
+    </div>
+  </a>
+  <a href="tel:+254742908950" class="position-fixed" style="right:18px;bottom:150px;z-index:9999;">
+    <div class="call-fab d-flex align-items-center justify-content-center" aria-hidden="true">
+      <i class="bi bi-telephone fs-4"></i>
+    </div>
+  </a>
+
+  <!-- VENDOR SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Navbar background on scroll
+      const navbar = document.getElementById('mainNavbar');
+      const onScrollNav = () => {
+        if (window.scrollY > 50) navbar.classList.add('nav-scrolled');
+        else navbar.classList.remove('nav-scrolled');
+      };
+      onScrollNav();
+      window.addEventListener('scroll', onScrollNav);
+
+      // Initialize AOS
+      AOS.init({ duration: 800, once: true });
+
+      // Typed.js for small tagline
+      new Typed('#typed-target', {
+        strings: ['Fast. Reliable. Secure.', 'Fiber & Wireless Solutions', '24/7 Local Support'],
+        typeSpeed: 60,
+        backSpeed: 40,
+        backDelay: 1600,
+        loop: true
+      });
+
+      // Swiper instances
+      new Swiper('.clientSwiper', {
+        slidesPerView: 3, spaceBetween: 24, loop: true,
+        autoplay: { delay: 1600, disableOnInteraction: false },
+        breakpoints: { 320: { slidesPerView: 2 }, 640: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } }
+      });
+
+      new Swiper('.testimonialSwiper', {
+        slidesPerView: 1, loop: true, autoplay: { delay: 4200 },
+        pagination: { el: '.testimonialSwiper .swiper-pagination', clickable: true }
+      });
+
+      new Swiper('.portfolioSwiper', {
+        slidesPerView: 1, spaceBetween: 20, loop: true,
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        pagination: { el: '.swiper-pagination', clickable: true },
+        autoplay: { delay: 4500, disableOnInteraction: false },
+        breakpoints: { 768: { slidesPerView: 2 }, 992: { slidesPerView: 3 } }
+      });
+
+      // Counters
+      const counters = document.querySelectorAll('.counter');
+      const animateCounter = (el) => {
+        const target = +el.dataset.target;
+        const duration = 1400;
+        let start = 0;
+        const stepTime = Math.max(10, Math.floor(duration / Math.max(target,1)));
+        const timer = setInterval(() => {
+          start += Math.max(1, Math.floor(target / (duration / stepTime)));
+          if (start >= target) { el.textContent = target; clearInterval(timer); }
+          else el.textContent = start;
+        }, stepTime);
+      };
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { animateCounter(entry.target); obs.unobserve(entry.target); }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(c => obs.observe(c));
+
+      // Scroll-to-top
+      const scrollTopBtn = document.getElementById('scrollTop');
+      window.addEventListener('scroll', () => {
+        scrollTopBtn.style.display = (window.scrollY > 400) ? 'flex' : 'none';
+      });
+      scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Smooth scroll for same-page anchors (offset for navbar)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            const offset = 80;
+            const topPos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: topPos, behavior: 'smooth' });
+            // collapse mobile nav if open
+            const bsCollapse = document.querySelector('.navbar-collapse');
+            if (bsCollapse && bsCollapse.classList.contains('show')) new bootstrap.Collapse(bsCollapse).hide();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

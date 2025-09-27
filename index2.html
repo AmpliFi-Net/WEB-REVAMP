@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AmpliFi Networks — Fast. Reliable. Secure.</title>
+  <meta name="description" content="AmpliFi Networks — Fast, reliable and affordable internet packages across Kenya. Fiber, business links, hotspots & managed connectivity.">
+  <meta name="author" content="AmpliFi Networks">
+  <meta property="og:title" content="AmpliFi Networks — Fast. Reliable. Secure." />
+  <meta property="og:description" content="High-performance internet packages and managed connectivity across Kenya." />
+  <meta property="og:image" content="assets/img/og-image.png" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Tailwind utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    :root {
+      --brand-teal: #0d9488;
+      --bg: #f8fafc;
+      --dark: #0f172a;
+    }
+    body { background: var(--bg); color: var(--dark); font-family: "Inter", sans-serif; }
+    .hero-gradient { background: linear-gradient(135deg, #0d9488 0%, #0284c7 100%); color: #fff; }
+    .card-hover { transition: all .3s ease; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(2,6,23,0.08); }
+    .btn-cta { background: linear-gradient(90deg,#06b6d4,#06b6a4); color: #fff; border: none; }
+    .btn-cta:hover { opacity: 0.9; }
+    .nav-scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .typed-cursor { opacity: 1; animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    #scrollTop { right: 18px; bottom: 18px; position: fixed; display: none; z-index: 9999; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="fixed-top">
+    <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-transparent py-3 transition-all">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <img src="assets/img/favicon-32x32.png" alt="AmpliFi" width="60" height="60" class="rounded-sm">
+          <span class="fw-bold" style="color:var(--brand-teal); font-size: 2rem;">AmpliFi Networks</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+          <i class="bi bi-list fs-3"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navCollapse">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="packages.html">Packages</a></li>
+            <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+            <li class="nav-item"><a class="nav-link" href="payment.html">Payments</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item ms-3"><a class="btn btn-sm btn-outline-primary" href="packages.html">View Plans</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero-gradient d-flex align-items-center min-vh-100">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 text-center text-lg-start" data-aos="fade-right">
+          <h1 class="display-4 fw-bold">Fast. Reliable. Secure.</h1>
+          <p class="lead text-white/90 mb-4">Internet solutions for homes, businesses, and enterprises across Kenya.</p>
+          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+            <a href="packages.html" class="btn btn-lg btn-cta">Explore Packages</a>
+            <a href="contact.html" class="btn btn-lg btn-outline-light">Get Connected</a>
+          </div>
+          <div class="mt-4 text-white/80 small">
+            <span id="typed-target"></span>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="rounded-xl overflow-hidden shadow-lg">
+            <img src="assets/img/12481716.jpg" alt="Connectivity" class="w-100 rounded">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW -->
+  <section id="about" class="py-12 bg-white">
+    <div class="container text-center" data-aos="fade-up">
+      <h2 class="fw-bold mb-3">About Us</h2>
+      <p class="text-muted mb-4">Delivering fast, secure, and affordable internet with a human touch. We keep homes, SMEs, and enterprises connected 24/7.</p>
+      <a href="about.html" class="btn btn-outline-primary">Learn More</a>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section id="services" class="py-12 bg-slate-50">
+    <div class="container" data-aos="fade-up">
+      <div class="text-center mb-6">
+        <h2 class="fw-bold">Our Services</h2>
+        <p class="text-muted">From homes to enterprises — connectivity tailored for you.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-4 bg-white card-hover rounded-xl shadow-sm text-center">
+            <i class="bi bi-wifi fs-2 text-teal-600 mb-3"></i>
+            <h5>Home Broadband</h5>
+            <p class="text-muted">Affordable internet for households with unlimited data.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 bg-white card-hover rounded-xl shadow-sm text-center">
+            <i class="bi bi-building fs-2 text-teal-600 mb-3"></i>
+            <h5>Business Connectivity</h5>
+            <p class="text-muted">SLA-backed internet with static IPs & 24/7 support.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 bg-white card-hover rounded-xl shadow-sm text-center">
+            <i class="bi bi-shop-window fs-2 text-teal-600 mb-3"></i>
+            <h5>Hotspot Solutions</h5>
+            <p class="text-muted">Reliable WiFi for cafés, events, and public spaces.</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5">
+        <a href="services.html" class="btn btn-outline-primary">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES PREVIEW -->
+  <section id="packages" class="py-12 container" data-aos="fade-up">
+    <div class="text-center mb-6">
+      <h2 class="fw-bold">Featured Packages</h2>
+      <p class="text-muted">Choose a plan that fits your needs.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-4 card-hover rounded-xl shadow-sm bg-white text-center">
+          <span class="badge bg-teal-600 mb-2">Starter</span>
+          <h4>5 Mbps</h4>
+          <p class="fw-bold">KES 1,500 / month</p>
+          <a href="packages.html" class="btn btn-sm btn-cta">Get Started</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 card-hover rounded-xl shadow-sm bg-white text-center">
+          <span class="badge bg-primary mb-2">Business</span>
+          <h4>40 Mbps</h4>
+          <p class="fw-bold">KES 5,000 / month</p>
+          <a href="packages.html" class="btn btn-sm btn-cta">Get Started</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 card-hover rounded-xl shadow-sm bg-white text-center">
+          <span class="badge bg-dark mb-2">Enterprise</span>
+          <h4>100+ Mbps</h4>
+          <p class="fw-bold">Custom Pricing</p>
+          <a href="contact.html" class="btn btn-sm btn-outline-primary">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 hero-gradient text-center">
+    <div class="container">
+      <h2 class="fw-bold">Ready to connect?</h2>
+      <p class="text-white/90 mb-4">Talk to our team and get installed within 48 hours.</p>
+      <a href="contact.html" class="btn btn-lg btn-light">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-6 bg-slate-900 text-white">
+    <div class="container d-flex flex-column align-items-center gap-3 text-center">
+      <img src="assets/img/favicon-32x32.png" alt="AmpliFi" width="40" class="mb-2">
+      <strong>AmpliFi Networks</strong>
+      <small class="text-white/60">© 2025 AmpliFi Networks | <a href="payment.html" class="text-white">Payments</a></small>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button id="scrollTop" class="btn btn-light rounded-circle shadow"><i class="bi bi-arrow-up-short fs-4"></i></button>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      AOS.init({ duration: 800, once: true });
+      // Navbar scroll effect
+      const navbar = document.getElementById("mainNavbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("nav-scrolled", window.scrollY > 50);
+      });
+      // Typed.js
+      new Typed("#typed-target", {
+        strings: ["Fiber & Wireless Solutions", "24/7 Local Support", "Connecting Kenya Seamlessly"],
+        typeSpeed: 60, backSpeed: 40, backDelay: 1500, loop: true
+      });
+      // Scroll to top
+      const scrollTopBtn = document.getElementById("scrollTop");
+      window.addEventListener("scroll", () => {
+        scrollTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+      });
+      scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    });
+  </script>
+</body>
+</html>
