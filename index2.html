@@ -44,6 +44,13 @@
     .typed-cursor { opacity: 1; animation: blink 0.7s infinite; }
     @keyframes blink { 50% { opacity: 0; } }
     #scrollTop { right: 18px; bottom: 18px; position: fixed; display: none; z-index: 9999; }
+
+    #floatingNotice {
+  animation-duration: 0.8s;
+  max-width: 90%;
+  text-align: center;
+}
+
   </style>
 </head>
 <body>
@@ -224,5 +231,39 @@
       scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     });
   </script>
+
+  <!-- // Floating rotating notice
+const notices = [
+  "🚀 Welcome to AmpliFi Networks",
+  "📞 24/7 Local Support",
+  "⚡ Get connected in 48 hours",
+  "💡 Affordable Packages Available"
+];
+
+let noticeIndex = 0;
+const floatingNotice = document.getElementById("floatingNotice");
+const noticeText = document.getElementById("noticeText");
+
+// Show the first notice
+function showNotice() {
+  floatingNotice.classList.remove("hidden");
+  noticeText.textContent = notices[noticeIndex];
+  noticeIndex = (noticeIndex + 1) % notices.length;
+}
+
+// Rotate every 5 seconds
+setInterval(showNotice, 5000);
+
+// Show immediately on load
+showNotice();
+ -->
+
+    <!-- Floating Notification -->
+  <div id="floatingNotice" class="fixed-bottom start-50 translate-middle-x mb-4 z-50 hidden">
+    <div class="bg-teal-600 text-white px-4 py-3 rounded-xl shadow-lg animate__animated animate__fadeInUp">
+      <span id="noticeText">Welcome to AmpliFi Networks 🚀</span>
+    </div>
+  </div>
+
 </body>
 </html>
