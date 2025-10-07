@@ -28,27 +28,28 @@
 {
   "hours": [8, 17],
   "dates": {
-    "start": "2025-10-07",   // Tuesday, start of CS Week
-    "end": "2025-10-11"      // Saturday, end of CS Week
+    "start": "2025-10-07",
+    "end": "2025-10-11"
   }
 }
 </script>
 
 <script>
-  // Close button logic
   document.addEventListener("DOMContentLoaded", function() {
     const advert = document.getElementById("advert-content");
     const closeBtn = document.getElementById("advert-close");
 
-    closeBtn.addEventListener("click", function() {
-      advert.style.display = "none";
-      // Optional: remember in localStorage so it doesn’t show again this session
-      sessionStorage.setItem("advertClosed", "true");
-    });
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function() {
+        advert.remove();  // fully removes the advert from the DOM
+        // Optional: persist the dismissal until the page reloads
+        sessionStorage.setItem("advertClosed", "true");
+      });
+    }
 
-    // If already closed in this session, keep it hidden
+    // If already closed in this session, don’t show it again
     if (sessionStorage.getItem("advertClosed") === "true") {
-      advert.style.display = "none";
+      advert.remove();
     }
   });
 </script>
