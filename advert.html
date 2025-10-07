@@ -1,7 +1,7 @@
 <!-- advert.html -->
 <div id="advert-content" class="relative bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-xl shadow-2xl p-5">
   <!-- Close Button -->
-  <button id="advert-close" 
+  <button id="advert-close"
           class="absolute top-2 right-2 text-white hover:text-gray-200 text-lg font-bold focus:outline-none"
           aria-label="Close">
     ×
@@ -15,7 +15,7 @@
         Celebrate with us! Enjoy <span class="font-semibold">FREE Internet</span><br>
         <strong>Everyday, 8:00 AM – 5:00 PM</strong> this week.
       </p>
-      <a href="#login-section" 
+      <a href="#login-section"
          class="mt-3 inline-block px-4 py-2 bg-white text-blue-700 rounded-lg font-semibold shadow hover:bg-gray-100 transition">
         Connect Now
       </a>
@@ -35,21 +35,20 @@
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     const advert = document.getElementById("advert-content");
     const closeBtn = document.getElementById("advert-close");
 
-    if (closeBtn) {
-      closeBtn.addEventListener("click", function() {
-        advert.remove();  // fully removes the advert from the DOM
-        // Optional: persist the dismissal until the page reloads
+    if (closeBtn && advert) {
+      closeBtn.addEventListener("click", function () {
+        advert.style.display = "none"; // hide instead of remove for safety
         sessionStorage.setItem("advertClosed", "true");
       });
     }
 
-    // If already closed in this session, don’t show it again
-    if (sessionStorage.getItem("advertClosed") === "true") {
-      advert.remove();
+    // Check if previously closed
+    if (sessionStorage.getItem("advertClosed") === "true" && advert) {
+      advert.style.display = "none";
     }
   });
 </script>
