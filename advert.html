@@ -1,36 +1,28 @@
-<!-- Schedule Settings -->
-<script type="application/json" id="advert-settings">
-{
-  "days": [3, 6],             /* Show only on Fri (5) & Sat (6) */
-  "hours": [8, 00],           /* Show only between 08:00 - 22:00 */
-  "dates": {                  /* Show only within this date range */
-    "start": "2025-10-01",
-    "end": "2025-10-15"
-  }
-}
-</script>
-
-<!-- Advert Content -->
-<div id="advert-content" class="relative bg-gradient-to-r from-green-600 to-blue-700 text-white p-5 rounded-xl shadow-2xl">
-  <!-- Close Button -->
-  <button onclick="this.parentElement.parentElement.remove()" 
-          class="absolute top-2 right-2 text-white hover:text-gray-200">
-    <i class="fas fa-times"></i>
-  </button>
-
+<!-- advert.html -->
+<div id="advert-content" class="bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-xl shadow-2xl p-5">
   <div class="flex items-start space-x-3">
-    <div class="text-3xl"><i class="fas fa-gift"></i></div>
+    <div class="text-4xl"><i class="fas fa-gift"></i></div>
     <div>
-      <h2 class="text-lg font-bold">🎉 October Promo</h2>
+      <h2 class="text-lg font-bold">🎉 Customer Service Week 🎉</h2>
       <p class="text-sm mt-1">
-        Enjoy <strong>Unlimited Internet</strong> of <strong>120 minutes</strong> at only 
-        <span class="bg-yellow-300 text-gray-900 px-2 py-1 rounded">Ksh 10</span>.  
-        Valid <em>Oct 1 – Oct 15</em>.
+        Celebrate with us! Enjoy <span class="font-semibold">FREE Internet</span><br>
+        <strong>Everyday, 8:00 AM – 5:00 PM</strong> this week.
       </p>
       <a href="#login-section" 
-         class="mt-3 inline-block px-4 py-2 bg-white text-green-700 rounded-lg font-semibold shadow hover:bg-gray-100 transition">
+         class="mt-3 inline-block px-4 py-2 bg-white text-blue-700 rounded-lg font-semibold shadow hover:bg-gray-100 transition">
         Connect Now
       </a>
     </div>
   </div>
 </div>
+
+<!-- Schedule: Show only this week -->
+<script type="application/json" id="advert-settings">
+{
+  "hours": [8, 17],
+  "dates": {
+    "start": "2025-10-07",   // Tuesday, start of CS Week
+    "end": "2025-10-11"      // Saturday, end of CS Week
+  }
+}
+</script>
