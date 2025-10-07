@@ -1,12 +1,19 @@
 <!-- advert.html -->
-<div id="advert-content" class="bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-xl shadow-2xl p-5">
+<div id="advert-content" class="relative bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-xl shadow-2xl p-5">
+  <!-- Close Button -->
+  <button id="advert-close" 
+          class="absolute top-2 right-2 text-white hover:text-gray-200 text-lg font-bold focus:outline-none"
+          aria-label="Close">
+    ×
+  </button>
+
   <div class="flex items-start space-x-3">
     <div class="text-4xl"><i class="fas fa-gift"></i></div>
     <div>
       <h2 class="text-lg font-bold">🎉 Customer Service Week 🎉</h2>
       <p class="text-sm mt-1">
         Celebrate with us! Enjoy <span class="font-semibold">FREE Internet</span><br>
-        <strong>Everyday, 12:00 pm – 4:00 PM</strong> this week.
+        <strong>Everyday, 8:00 AM – 5:00 PM</strong> this week.
       </p>
       <a href="#login-section" 
          class="mt-3 inline-block px-4 py-2 bg-white text-blue-700 rounded-lg font-semibold shadow hover:bg-gray-100 transition">
@@ -25,4 +32,23 @@
     "end": "2025-10-11"      // Saturday, end of CS Week
   }
 }
+</script>
+
+<script>
+  // Close button logic
+  document.addEventListener("DOMContentLoaded", function() {
+    const advert = document.getElementById("advert-content");
+    const closeBtn = document.getElementById("advert-close");
+
+    closeBtn.addEventListener("click", function() {
+      advert.style.display = "none";
+      // Optional: remember in localStorage so it doesn’t show again this session
+      sessionStorage.setItem("advertClosed", "true");
+    });
+
+    // If already closed in this session, keep it hidden
+    if (sessionStorage.getItem("advertClosed") === "true") {
+      advert.style.display = "none";
+    }
+  });
 </script>
