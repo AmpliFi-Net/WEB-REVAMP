@@ -1,54 +1,207 @@
-<!-- advert.html -->
-<div id="advert-content" class="relative bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-xl shadow-2xl p-5">
-  <!-- Close Button -->
-  <button id="advert-close"
-          class="absolute top-2 right-2 text-white hover:text-gray-200 text-lg font-bold focus:outline-none"
-          aria-label="Close">
-    ×
-  </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mazingira Day Free Internet Promo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+    }
+    #advert-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+    #advert-content {
+      position: relative;
+      width: 90%;
+      max-width: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      color: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
 
-  <div class="flex items-start space-x-3">
-    <div class="text-4xl"><i class="fas fa-gift"></i></div>
-    <div>
-      <h2 class="text-lg font-bold">🎉 Customer Service Week 🎉</h2>
-      <p class="text-sm mt-1">
-        Celebrate with us! Enjoy <span class="font-semibold">FREE Internet</span><br>
-        <strong>Everyday, 8:00 AM – 5:00 PM</strong> this week.
-      </p>
-      <a href="#login-section"
-         class="mt-3 inline-block px-4 py-2 bg-white text-blue-700 rounded-lg font-semibold shadow hover:bg-gray-100 transition">
-        Connect Now
-      </a>
+    /* Kenya flag background */
+    #flag-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(to bottom,
+        black 33%, red 33%, red 66%, green 66%);
+      background-size: 100% 300%;
+      animation: wave 6s infinite linear;
+      z-index: 0;
+    }
+
+    @keyframes wave {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* White overlay for stripes */
+    #flag-overlay {
+      position: absolute;
+      top: 33%;
+      width: 100%;
+      height: 6%;
+      background: white;
+      z-index: 1;
+    }
+    #flag-overlay::after {
+      content: '';
+      position: absolute;
+      top: 33%;
+      width: 100%;
+      height: 6%;
+      background: white;
+    }
+
+    #advert-overlay {
+      position: relative;
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 16px;
+      padding: 24px;
+      z-index: 2;
+    }
+
+    #advert-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      z-index: 3;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #c62828;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 22px;
+      line-height: 36px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    #advert-close:hover {
+      background: #b71c1c;
+    }
+
+    #advert-content .inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    #advert-content .icon {
+      font-size: 2.7rem;
+    }
+    #advert-content h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    #advert-content p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    a.connect-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
+      background: #fff;
+      color: #2e7d32;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    a.connect-btn:hover {
+      background: #f5f5f5;
+    }
+
+    @media (max-width: 480px) {
+      #advert-content {
+        max-width: 320px;
+      }
+      #advert-overlay {
+        padding: 18px;
+      }
+      #advert-close {
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+        top: -12px;
+        right: -12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="advert-wrapper">
+    <div id="advert-content">
+      <div id="flag-bg"></div>
+      <div id="flag-overlay"></div>
+
+      <button id="advert-close" aria-label="Close">×</button>
+
+      <div id="advert-overlay">
+        <div class="inner">
+          <div class="icon">🌍</div>
+          <div>
+            <h2>🌿 Mazingira Day Celebration 🌿</h2>
+            <p>
+              Celebrate our environment with us! <br>
+              Enjoy <strong>FREE Internet</strong> this <strong>Friday</strong><br>
+              from <strong>7:00 AM – 7:00 PM</strong>
+            </p>
+            <a href="#login-section" class="connect-btn">Connect Now</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Schedule: Show only this week -->
-<script type="application/json" id="advert-settings">
-{
-  "hours": [8, 23],
-  "dates": {
-    "start": "2025-10-07",
-    "end": "2025-10-11"
-  }
-}
-</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const wrapper = document.getElementById('advert-wrapper');
+      const closeBtn = document.getElementById('advert-close');
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const advert = document.getElementById("advert-content");
-    const closeBtn = document.getElementById("advert-close");
-
-    if (closeBtn && advert) {
-      closeBtn.addEventListener("click", function () {
-        advert.style.display = "none"; // hide instead of remove for safety
-        sessionStorage.setItem("advertClosed", "true");
+      closeBtn.addEventListener('click', () => {
+        wrapper.style.display = 'none';
+        sessionStorage.setItem('advertClosedMazingira', 'true');
       });
-    }
 
-    // Check if previously closed
-    if (sessionStorage.getItem("advertClosed") === "true" && advert) {
-      advert.style.display = "none";
-    }
-  });
-</script>
+      if (sessionStorage.getItem('advertClosedMazingira') === 'true') {
+        wrapper.style.display = 'none';
+      }
+
+      // Show only Oct 8 to Oct 10 (until midnight), and between 7AM–7PM
+      const now = new Date();
+      const year = now.getFullYear();
+      const start = new Date(`${year}-10-08T00:00:00`);
+      const end = new Date(`${year}-10-11T00:00:00`); // midnight after 10th
+      const hr = now.getHours();
+
+      if (now < start || now >= end || hr < 7 || hr >= 19) {
+        wrapper.style.display = 'none';
+      }
+    });
+  </script>
+
+</body>
+</html>
