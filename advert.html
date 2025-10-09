@@ -6,9 +6,10 @@
   <title>Advert (AmpliFi)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { margin:0; padding:0; background:transparent; }
+    body { margin:0; padding:0; background:transparent; font-family: 'Inter', sans-serif; }
     .fade-card { animation: fadeCard .5s ease-out both; }
-    @keyframes fadeCard { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+    @keyframes fadeCard { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
     .gradient-animated {
       background: linear-gradient(90deg,#06b6d4,#34d399,#60a5fa);
       -webkit-background-clip: text;
@@ -17,12 +18,19 @@
       animation: shimmer 3s linear infinite;
       background-size: 200% auto;
     }
+
     @keyframes shimmer {
       0%{background-position:0% 50%}
       50%{background-position:100% 50%}
       100%{background-position:0% 50%}
     }
-    .pill { display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:600; }
+
+    /* rotation animation for promos */
+    .fade-in { opacity:0; animation: fadeIn 1s forwards; }
+    @keyframes fadeIn {
+      from { opacity:0; transform: translateY(10px); }
+      to { opacity:1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -31,15 +39,12 @@
   <script>
   (function() {
     const SCOREBAT_API = 'https://www.scorebat.com/video-api/v3/feed/?token=MTExNjNfMTcwNzQwMTg0Nl85MzhiYjRlMGI3MjVkZWEzMTU2ZTlmNGZmYmUyYjM1YjI1OTFkYzFh';
-    const MAX_MATCHES = 6;
+    const MAX_MATCHES = 10;
 
     const PRIORITY_LEAGUES = [
-      'Premier League', 'EPL',
-      'UEFA Champions League', 'Europa League', 'Conference League',
-      'LaLiga', 'Serie A', 'Bundesliga', 'Ligue 1',
-      'Kenya Premier League', 'Kenyan',
-      'CAF Champions League', 'CAF Confederation Cup',
-      'FIFA World Cup Qualifying', 'World Cup', 'International', 'Friendly', 'UEFA Euro Qualifiers', 'AFCON Qualifiers'
+      'Premier League','EPL','UEFA Champions League','Europa League',
+      'Conference League','LaLiga','Serie A','Bundesliga','Ligue 1',
+      'Kenya Premier League','Kenyan','CAF Champions League','World Cup','Qualifiers'
     ];
 
     const HOLIDAYS = {
@@ -51,6 +56,12 @@
       "12-25": { title: "🎄 Merry Christmas!", message: "Spread holiday joy with fast, reliable AmpliFi WiFi!" },
       "12-31": { title: "🎊 New Year’s Eve", message: "Ring in the new year online with AmpliFi!" }
     };
+
+    const PROMOS = [
+      { title: "⚡ Fast. Reliable. Unlimited.", text: "Experience blazing speeds with AmpliFi WiFi." },
+      { title: "🌍 Connect Freely", text: "Stay online anywhere, anytime — powered by AmpliFi." },
+      { title: "💡 Smart Internet, Smarter Living", text: "Enjoy seamless browsing, streaming, and gaming." }
+    ];
 
     function getNairobiMMDD(offsetDays=0) {
       const now = new Date();
@@ -87,21 +98,40 @@
         </div>`;
     }
 
-    function matchCard(m) {
-      const comp = (m.competition && (m.competition.name||m.competition)) || 'Match';
-      const kickoff = toNairobiTime(m.date);
-      const title = m.title || `${m.side1?.name || ''} vs ${m.side2?.name || ''}`;
+    function matchesListCard(matches) {
       return `
-        <div class="bg-white rounded-2xl shadow-md p-4 mb-3 fade-card hover:shadow-lg transition">
-          <div class="flex justify-between items-start">
-            <div>
-              <div class="text-gray-500 text-sm mb-1">${comp}</div>
-              <div class="font-semibold text-gray-800">${title}</div>
-              <div class="text-sm text-gray-600 mt-1">Kickoff: ${kickoff}</div>
-            </div>
-            <a href="${m.matchviewUrl||m.url}" target="_blank" rel="noopener" class="pill bg-gray-100 text-blue-700 hover:bg-blue-100">View</a>
-          </div>
+        <div class="bg-white/90 rounded-2xl shadow-md p-5 fade-card">
+          <h2 class="text-xl font-bold gradient-animated mb-3">⚽ Top Matches Today</h2>
+          <ul class="divide-y divide-gray-200 text-gray-800 text-sm">
+            ${matches.map(m => {
+              const comp = (m.competition && (m.competition.name||m.competition)) || '';
+              const title = m.title || `${m.side1?.name || ''} vs ${m.side2?.name || ''}`;
+              const kickoff = toNairobiTime(m.date);
+              return `
+                <li class="py-2 flex justify-between items-center">
+                  <span class="truncate">
+                    <strong>${title}</strong> <span class="text-gray-500">(${comp})</span>
+                  </span>
+                  <span class="text-blue-600 font-medium">${kickoff}</span>
+                </li>`;
+            }).join('')}
+          </ul>
         </div>`;
+    }
+
+    function promoMessageRotator(container) {
+      let i = 0;
+      function rotate() {
+        const p = PROMOS[i % PROMOS.length];
+        container.innerHTML = `
+          <div class="bg-white rounded-2xl shadow-md p-6 fade-in text-center">
+            <h3 class="text-xl font-bold gradient-animated mb-2">${p.title}</h3>
+            <p class="text-gray-700">${p.text}</p>
+          </div>`;
+        i++;
+      }
+      rotate();
+      setInterval(rotate, 5000); // change every 5s
     }
 
     async function loadAdvert() {
@@ -112,13 +142,11 @@
       const holidayTomorrow = HOLIDAYS[tomorrowMMDD];
       const blocks = [];
 
-      // Add holiday advert on top
       if (holidayTomorrow) blocks.push(holidayCard(holidayTomorrow));
 
-      // Load football matches
       try {
         const res = await fetch(SCOREBAT_API, { cache:'no-store' });
-        if (!res.ok) throw new Error('API Error');
+        if (!res.ok) throw new Error('API error');
         const json = await res.json();
         const items = json.response || [];
         const todayMatches = items.filter(m => {
@@ -129,16 +157,12 @@
           const key = `${mmdd.month}-${mmdd.day}`;
           return key === todayMMDD;
         });
-        const selected = todayMatches.filter(m => isPriority((m.competition && (m.competition.name||'')) || m.title))
-                                     .slice(0, MAX_MATCHES);
-        if (selected.length) {
-          blocks.push(`<div class="bg-white/80 rounded-2xl shadow-inner p-4 fade-card">
-            <h2 class="text-xl font-bold gradient-animated mb-3">⚽ Top Matches Today</h2>
-            ${selected.map(matchCard).join('')}
-          </div>`);
-        }
-      } catch(err) {
-        console.warn('ScoreBat load failed', err);
+
+        const matches = todayMatches.filter(m => isPriority((m.competition && (m.competition.name||'')) || m.title))
+                                    .slice(0, MAX_MATCHES);
+        if (matches.length) blocks.push(matchesListCard(matches));
+      } catch (err) {
+        console.warn('⚠️ Could not load matches:', err);
       }
 
       if (blocks.length) {
@@ -147,7 +171,10 @@
             ${blocks.join('')}
           </div>`;
       } else {
-        container.remove();
+        // If no holiday or match, show rotating promo
+        const promoBox = document.createElement('div');
+        promoMessageRotator(promoBox);
+        container.appendChild(promoBox);
       }
     }
 
