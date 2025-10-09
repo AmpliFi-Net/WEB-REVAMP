@@ -6,249 +6,151 @@
   <title>Advert (AmpliFi)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* small animations for cards */
-    .fade-card { animation: fadeCard .45s ease-out both; }
+    body { margin:0; padding:0; background:transparent; }
+    .fade-card { animation: fadeCard .5s ease-out both; }
     @keyframes fadeCard { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
-
-    /* animated gradient headline */
     .gradient-animated {
       background: linear-gradient(90deg,#06b6d4,#34d399,#60a5fa);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       animation: shimmer 3s linear infinite;
+      background-size: 200% auto;
     }
     @keyframes shimmer {
       0%{background-position:0% 50%}
       50%{background-position:100% 50%}
       100%{background-position:0% 50%}
     }
-
-    /* small pill */
     .pill { display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:600; }
-
-    /* hide body overflow for safety in case of embedding */
-    body { margin:0; padding:0; background:transparent; }
   </style>
 </head>
 <body>
-  <!-- IMPORTANT: when this file has no content to show, do NOT output #advert-content (login.html will hide the section). -->
-  <div id="advert-content" class="max-w-4xl mx-auto p-4"></div>
+  <div id="advert-content" class="max-w-5xl mx-auto p-4"></div>
 
   <script>
   (function() {
-    // --- CONFIG ---
     const SCOREBAT_API = 'https://www.scorebat.com/video-api/v3/feed/?token=MTExNjNfMTcwNzQwMTg0Nl85MzhiYjRlMGI3MjVkZWEzMTU2ZTlmNGZmYmUyYjM1YjI1OTFkYzFh';
-    // Competitions we prioritise (case-insensitive substrings)
+    const MAX_MATCHES = 6;
+
     const PRIORITY_LEAGUES = [
-      'Premier League', 'EPL',               // England
-      'UEFA Champions League', 'Champions League',
-      'LaLiga', 'Primera Division',          // Spain
-      'Serie A', 'Lega Serie A',             // Italy
-      'Bundesliga',                           // Germany
-      'Kenya Premier League', 'Kenyan', 'Kenya' // Kenyan matches - ScoreBat may not have them but we include
+      'Premier League', 'EPL',
+      'UEFA Champions League', 'Europa League', 'Conference League',
+      'LaLiga', 'Serie A', 'Bundesliga', 'Ligue 1',
+      'Kenya Premier League', 'Kenyan',
+      'CAF Champions League', 'CAF Confederation Cup',
+      'FIFA World Cup Qualifying', 'World Cup', 'International', 'Friendly', 'UEFA Euro Qualifiers', 'AFCON Qualifiers'
     ];
-    // Holidays (MM-DD). We show the holiday message one day before the date in Africa/Nairobi timezone.
+
     const HOLIDAYS = {
-      "01-01": { title: "🎆 Happy New Year!", message: "Start the year connected with AmpliFi WiFi!" },
-      "06-01": { title: "👨‍👩‍👧‍👦 Madaraka Day", message: "Celebrate Kenya’s self-rule — enjoy reliable internet!" },
-      "10-09": { title: "🌿 Mazingira Day", message: "Mazingira Day — go green and stay connected!" },
+      "01-01": { title: "🎆 Happy New Year!", message: "Start your year connected with AmpliFi WiFi!" },
+      "06-01": { title: "👨‍👩‍👧‍👦 Madaraka Day", message: "Celebrate Kenya’s self-rule — stay connected with AmpliFi!" },
+      "10-09": { title: "🌿 Mazingira Day", message: "Tomorrow is Mazingira Day — go green and stay connected!" },
       "10-20": { title: "🇰🇪 Mashujaa Day", message: "Tomorrow is Mashujaa Day — celebrate Kenya’s heroes with AmpliFi!" },
-      "12-12": { title: "🎉 Jamhuri Day", message: "Jamhuri Day celebrations — stay online and share the joy!" },
-      "12-25": { title: "🎄 Merry Christmas!", message: "Merry Christmas! Stream and share festive moments with AmpliFi." },
-      "12-31": { title: "🎊 Happy New Year's Eve!", message: "Get ready for the new year — stay connected with AmpliFi!" }
+      "12-12": { title: "🎉 Jamhuri Day", message: "Tomorrow is Jamhuri Day — celebrate independence online with AmpliFi!" },
+      "12-25": { title: "🎄 Merry Christmas!", message: "Spread holiday joy with fast, reliable AmpliFi WiFi!" },
+      "12-31": { title: "🎊 New Year’s Eve", message: "Ring in the new year online with AmpliFi!" }
     };
-    // How many matches to show max
-    const MAX_MATCHES = 5;
 
-    // Utility: format date/time in Nairobi timezone
-    function toNairobiDateObj(isoString) {
-      // parse iso string into Date then format components for Africa/Nairobi
-      try {
-        const d = new Date(isoString);
-        // Use Intl to get date parts in Africa/Nairobi
-        const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Nairobi', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false });
-        const parts = fmt.formatToParts(d).reduce((acc,p)=> (acc[p.type]=p.value,acc), {});
-        // return object with day key and time
-        const yyyy = parts.year, mm = parts.month, dd = parts.day;
-        const time = parts.hour + ':' + parts.minute;
-        const dateStr = `${yyyy}-${mm}-${dd}`;
-        return { dateStr, time };
-      } catch(e) {
-        // fallback: naive conversion (client timezone)
-        const d = new Date(isoString);
-        const yyyy = d.getFullYear();
-        const mm = String(d.getMonth()+1).padStart(2,'0');
-        const dd = String(d.getDate()).padStart(2,'0');
-        const hh = String(d.getHours()).padStart(2,'0');
-        const min = String(d.getMinutes()).padStart(2,'0');
-        return { dateStr: `${yyyy}-${mm}-${dd}`, time: `${hh}:${min}` };
-      }
-    }
-
-    // Get today's and tomorrow's MM-DD in Nairobi timezone
-    function getNairobiMMDD(offsetDays = 0) {
+    function getNairobiMMDD(offsetDays=0) {
       const now = new Date();
-      // convert to Nairobi time by creating string via Intl and re-parsing
-      const parts = new Intl.DateTimeFormat('en-GB', { timeZone:'Africa/Nairobi', year:'numeric', month:'2-digit', day:'2-digit' }).formatToParts(now).reduce((a,p)=> (a[p.type]=p.value,a), {});
+      const parts = new Intl.DateTimeFormat('en-GB', { timeZone:'Africa/Nairobi', year:'numeric', month:'2-digit', day:'2-digit' })
+        .formatToParts(now)
+        .reduce((a,p)=> (a[p.type]=p.value,a), {});
       const yyyy = Number(parts.year), mm = Number(parts.month), dd = Number(parts.day);
-      // build Date in Nairobi local time by constructing Date with yyyy,mm-1,dd then add offsetDays
-      const nairobiDate = new Date(Date.UTC(yyyy, mm-1, dd));
-      nairobiDate.setUTCDate(nairobiDate.getUTCDate() + offsetDays);
-      const mmS = String(nairobiDate.getUTCMonth()+1).padStart(2,'0');
-      const ddS = String(nairobiDate.getUTCDate()).padStart(2,'0');
+      const date = new Date(Date.UTC(yyyy, mm-1, dd));
+      date.setUTCDate(date.getUTCDate()+offsetDays);
+      const mmS = String(date.getUTCMonth()+1).padStart(2,'0');
+      const ddS = String(date.getUTCDate()).padStart(2,'0');
       return `${mmS}-${ddS}`;
     }
 
-    // Check if competition is priority
-    function isPriorityCompetition(name) {
-      if (!name) return false;
-      const n = name.toLowerCase();
-      return PRIORITY_LEAGUES.some(p => n.includes(p.toLowerCase()));
+    function toNairobiTime(iso) {
+      const d = new Date(iso);
+      const fmt = new Intl.DateTimeFormat('en-GB', {
+        timeZone:'Africa/Nairobi',
+        hour:'2-digit', minute:'2-digit', hour12:false
+      });
+      return fmt.format(d);
     }
 
-    // Build small match card HTML
-    function matchCardHtml(m, nairobiTime) {
-      const comp = m.competition && (m.competition.name || m.competition) || m.title || '';
-      const title = m.title || comp;
-      const url = m.matchviewUrl || m.url || '#';
-      const score = (m.side1 && m.side2) ? `${m.side1}-${m.side2}` : (m.score || '');
-      const timeTxt = nairobiTime || (m.date ? new Date(m.date).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : '');
+    function isPriority(comp) {
+      if (!comp) return false;
+      return PRIORITY_LEAGUES.some(x => comp.toLowerCase().includes(x.toLowerCase()));
+    }
+
+    function holidayCard(h) {
       return `
-        <div class="bg-white rounded-2xl shadow-lg p-4 mb-4 fade-card">
-          <div class="flex items-center justify-between">
-            <div class="text-left">
-              <div class="text-sm text-gray-500 mb-1">${comp}</div>
-              <div class="text-lg font-semibold text-gray-800">${title}</div>
-              <div class="text-sm text-gray-600 mt-1">Kickoff: ${timeTxt}</div>
+        <div class="bg-white rounded-2xl shadow-xl p-6 mb-6 fade-card">
+          <h3 class="text-2xl font-bold gradient-animated mb-2">${h.title}</h3>
+          <p class="text-gray-700 text-lg">${h.message}</p>
+        </div>`;
+    }
+
+    function matchCard(m) {
+      const comp = (m.competition && (m.competition.name||m.competition)) || 'Match';
+      const kickoff = toNairobiTime(m.date);
+      const title = m.title || `${m.side1?.name || ''} vs ${m.side2?.name || ''}`;
+      return `
+        <div class="bg-white rounded-2xl shadow-md p-4 mb-3 fade-card hover:shadow-lg transition">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-gray-500 text-sm mb-1">${comp}</div>
+              <div class="font-semibold text-gray-800">${title}</div>
+              <div class="text-sm text-gray-600 mt-1">Kickoff: ${kickoff}</div>
             </div>
-            <div class="text-right">
-              <div class="pill bg-gray-100 text-gray-800">${score || '—'}</div>
-              <div class="mt-3">
-                <a class="inline-block text-sm text-blue-600 hover:underline" href="${url}" target="_blank" rel="noopener">View</a>
-              </div>
-            </div>
+            <a href="${m.matchviewUrl||m.url}" target="_blank" rel="noopener" class="pill bg-gray-100 text-blue-700 hover:bg-blue-100">View</a>
           </div>
-        </div>
-      `;
+        </div>`;
     }
 
-    // Render holiday card
-    function holidayHtml(h) {
-      return `
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-4 fade-card">
-          <h3 class="text-2xl font-extrabold gradient-animated mb-2">${h.title}</h3>
-          <p class="text-gray-700">${h.message}</p>
-        </div>
-      `;
-    }
-
-    // Main load function
     async function loadAdvert() {
       const container = document.getElementById('advert-content');
-      container.innerHTML = ''; // clear
-
-      // Determine if tomorrow is a holiday (we show holiday the day before)
+      container.innerHTML = '';
       const tomorrowMMDD = getNairobiMMDD(1);
+      const todayMMDD = getNairobiMMDD(0);
       const holidayTomorrow = HOLIDAYS[tomorrowMMDD];
+      const blocks = [];
 
-      // We'll collect outputs into arrays
-      const holidayBlocks = [];
-      const matchBlocks = [];
+      // Add holiday advert on top
+      if (holidayTomorrow) blocks.push(holidayCard(holidayTomorrow));
 
-      // If holiday tomorrow, show it
-      if (holidayTomorrow) {
-        holidayBlocks.push(holidayHtml(holidayTomorrow));
-      }
-
-      // Try fetch ScoreBat feed and filter today's matches (Nairobi date)
-      let fetchedMatches = [];
+      // Load football matches
       try {
-        const resp = await fetch(SCOREBAT_API, { cache: "no-store" });
-        if (resp.ok) {
-          const json = await resp.json();
-          // ScoreBat v3 returns an array under response
-          const items = json.response || json;
-          // Filter to matches happening today in Nairobi
-          const todayMMDD = getNairobiMMDD(0);
-          for (const m of (items || [])) {
-            if (!m.date) continue;
-            // convert m.date to Nairobi date string yyyy-mm-dd and time
-            const dobj = toNairobiDateObj(m.date);
-            const mmdd = dobj.dateStr.slice(5); // MM-DD
-            if (mmdd === todayMMDD) {
-              // Determine competition name if available
-              // ScoreBat items sometimes include 'competition' object or embed competition in title
-              let compName = '';
-              if (m.competition) compName = (m.competition.name || m.competition);
-              // push enriched match
-              fetchedMatches.push({ ...m, compName, nairobiTime: dobj.time });
-            }
-          }
-        } else {
-          console.warn('ScoreBat fetch not ok:', resp.status);
+        const res = await fetch(SCOREBAT_API, { cache:'no-store' });
+        if (!res.ok) throw new Error('API Error');
+        const json = await res.json();
+        const items = json.response || [];
+        const todayMatches = items.filter(m => {
+          if (!m.date) return false;
+          const d = new Date(m.date);
+          const mmdd = new Intl.DateTimeFormat('en-GB', { timeZone:'Africa/Nairobi', month:'2-digit', day:'2-digit' })
+            .formatToParts(d).reduce((a,p)=> (a[p.type]=p.value,a), {});
+          const key = `${mmdd.month}-${mmdd.day}`;
+          return key === todayMMDD;
+        });
+        const selected = todayMatches.filter(m => isPriority((m.competition && (m.competition.name||'')) || m.title))
+                                     .slice(0, MAX_MATCHES);
+        if (selected.length) {
+          blocks.push(`<div class="bg-white/80 rounded-2xl shadow-inner p-4 fade-card">
+            <h2 class="text-xl font-bold gradient-animated mb-3">⚽ Top Matches Today</h2>
+            ${selected.map(matchCard).join('')}
+          </div>`);
         }
-      } catch (e) {
-        console.error('ScoreBat fetch error', e);
+      } catch(err) {
+        console.warn('ScoreBat load failed', err);
       }
 
-      // Prioritize matches in priority leagues
-      const priorityMatches = fetchedMatches.filter(m => {
-        const compCheck = (m.competition && (m.competition.name || m.competition)) || m.title || '';
-        return isPriorityCompetition(compCheck) || isPriorityCompetition(m.title || '');
-      });
-
-      // Build display order: priorityMatches first, then other matches (limit MAX_MATCHES)
-      const ordered = [...priorityMatches, ...fetchedMatches.filter(m => !priorityMatches.includes(m))].slice(0, MAX_MATCHES);
-
-      for (const m of ordered) {
-        const d = toNairobiDateObj(m.date);
-        matchBlocks.push(matchCardHtml(m, d.time));
-      }
-
-      // If we have at least one holiday or at least one match, render them
-      if (holidayBlocks.length || matchBlocks.length) {
-        // Build combined layout: holiday on left (if present), matches on right — but since this file is embedded inline
-        // We'll create a responsive stacked layout
-        let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
-        // If holiday exists, show as left column; if none, left column can be matches too
-        html += '<div>';
-        if (holidayBlocks.length) {
-          html += holidayBlocks.join('');
-        } else if (matchBlocks.length && matchBlocks.length <= 2) {
-          // If no holiday but few matches, show first match prominent here
-          html += matchBlocks.shift() || '';
-        }
-        html += '</div>';
-
-        // Right column: remaining matches
-        html += '<div>';
-        if (matchBlocks.length) {
-          html += matchBlocks.join('');
-        }
-        html += '</div>';
-
-        html += '</div>';
-
-        // Attach to container (wrapped within an outer card)
+      if (blocks.length) {
         container.innerHTML = `
-          <div class="bg-gradient-to-r from-white/60 to-white/40 border border-gray-200 rounded-3xl p-6">
-            <div class="flex items-center justify-between mb-4">
-              <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800"> <span class="gradient-animated">AmpliFi • Today</span> </h2>
-              <div class="text-sm text-gray-500">Kenya time (EAT)</div>
-            </div>
-            ${html}
-          </div>
-        `;
-        return; // done - we rendered something
+          <div class="bg-gradient-to-r from-white/70 to-white/50 backdrop-blur-md border border-gray-200 rounded-3xl p-6 shadow-lg">
+            ${blocks.join('')}
+          </div>`;
+      } else {
+        container.remove();
       }
-
-      // If we get here -> no holiday tomorrow AND no matches today => do not render #advert-content
-      // Remove the advert-content container entirely so login.html won't append it
-      container.remove(); // this causes login.html parser to find no #advert-content and it will hide the section
     }
 
-    // initial run + refresh every 3 hours
     loadAdvert();
     setInterval(loadAdvert, 3 * 60 * 60 * 1000);
   })();
